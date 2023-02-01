@@ -1,6 +1,6 @@
 package fulkerson;
 
-import generics.graph.impl.AdjacencyListFlowNetwork;
+import generics.graph.AdjacencyListFlowNetwork;
 import generics.graph.impl.AdjacencyListFlowNetworkImpl;
 
 import java.util.*;

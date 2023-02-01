@@ -1,5 +1,6 @@
 package generics.graph.impl;
 
+import generics.graph.AdjacencyListFlowNetwork;
 import generics.graph.PropertyHoldingEdge;
 
 public class AdjacencyListFlowNetworkImpl<IdentifierT> extends AdjacencyListGraph<IdentifierT,

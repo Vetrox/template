@@ -1,7 +1,5 @@
-package generics.graph.impl;
+package generics.graph;
 
-
-import generics.graph.PropertyHoldingGraph;
 
 public interface AdjacencyListFlowNetwork<IdentifierT> extends PropertyHoldingGraph<IdentifierT,
         AdjacencyListFlowNetwork.FlowCapacityProperty> {
