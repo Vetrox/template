@@ -1,6 +1,7 @@
 package fulkerson;
 
-import generics.AdjacencyListFlowNetwork;
+import generics.graph.impl.AdjacencyListFlowNetwork;
+import generics.graph.impl.AdjacencyListFlowNetworkImpl;
 
 import java.util.*;
 
@@ -48,7 +49,7 @@ public class FordFulkerson {
 
     private record PathAndCapacity<IdentifierT>(Path<IdentifierT> path, double choke) {}
 
-    public static <IdentifierT> double computeMaxFlow(AdjacencyListFlowNetwork<IdentifierT> network) {
+    public static <IdentifierT> double computeMaxFlow(AdjacencyListFlowNetworkImpl<IdentifierT> network) {
         // flow is initialized to 0 automatically
         double maxFlow = 0;
         AdjacencyListFlowNetwork<IdentifierT> restNetwork = network.constructRestGraph();
@@ -62,7 +63,7 @@ public class FordFulkerson {
         return maxFlow;
     }
 
-    private static <IdentifierT> void augment(AdjacencyListFlowNetwork<IdentifierT> network,
+    private static <IdentifierT> void augment(AdjacencyListFlowNetworkImpl<IdentifierT> network,
                                               PathAndCapacity<IdentifierT> augPath) {
         for (Path<IdentifierT>.Edge edge : augPath.path) {
             if (network.containsEdge(edge.from, edge.to))

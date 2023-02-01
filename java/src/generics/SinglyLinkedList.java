@@ -5,8 +5,28 @@ import java.util.Objects;
 
 public class SinglyLinkedList<T> implements Iterable<SinglyLinkedList<T>.Node> {
 
+    private Node start = null;
+    private Node end = null;
+    private int size = 0;
+
     public SinglyLinkedList() {
         validate(this);
+    }
+
+    public static <U> void validate(SinglyLinkedList<U> list) {
+        if (list.start == null && list.end == null) {
+            return;
+        }
+        assert list.start != null && list.end != null : "either start or end was null";
+        assert list.end.next == null : "end.next was not null";
+        assert list.iterator().hasNext() : "iterator returned no elements, when there has to be at least one";
+        assert list.iterator().next() == list.start : "iterator didn't return start as the first element";
+        int num = 0;
+        for (var ignored : list) {
+            num++;
+        }
+        assert list.size == num : "sizes didn't match";
+        // all fine.
     }
 
     @Override
@@ -28,32 +48,6 @@ public class SinglyLinkedList<T> implements Iterable<SinglyLinkedList<T>.Node> {
         };
     }
 
-    public class Node {
-        public T value;
-        public Node next;
-
-        public Node(T value, Node next) {
-            this.value = value;
-            this.next = next;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o)
-                return true;
-            if (o == null || getClass() != o.getClass())
-                return false;
-            Node node = (Node) o;
-            if (this.value.getClass() != node.value.getClass())
-                return false;
-            return Objects.equals(value, node.value) && Objects.equals(next, node.next);
-        }
-    }
-
-    private Node start = null;
-    private Node end = null;
-    private int size = 0;
-
     public void add(T value) {
         validate(this);
         size++;
@@ -65,22 +59,6 @@ public class SinglyLinkedList<T> implements Iterable<SinglyLinkedList<T>.Node> {
         end.next = new Node(value, null);
         end = end.next;
         validate(this);
-    }
-
-    public static <U> void validate(SinglyLinkedList<U> list) {
-        if (list.start == null && list.end == null) {
-            return;
-        }
-        assert list.start != null && list.end != null : "either start or end was null";
-        assert list.end.next == null : "end.next was not null";
-        assert list.iterator().hasNext() : "iterator returned no elements, when there has to be at least one";
-        assert list.iterator().next() == list.start : "iterator didn't return start as the first element";
-        int num = 0;
-        for (var ignored : list) {
-            num++;
-        }
-        assert list.size == num : "sizes didn't match";
-        // all fine.
     }
 
     @Override
@@ -130,6 +108,28 @@ public class SinglyLinkedList<T> implements Iterable<SinglyLinkedList<T>.Node> {
 
     public Node getEnd() {
         return end;
+    }
+
+    public class Node {
+        public T value;
+        public Node next;
+
+        public Node(T value, Node next) {
+            this.value = value;
+            this.next = next;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o)
+                return true;
+            if (o == null || getClass() != o.getClass())
+                return false;
+            Node node = (Node) o;
+            if (this.value.getClass() != node.value.getClass())
+                return false;
+            return Objects.equals(value, node.value) && Objects.equals(next, node.next);
+        }
     }
 
 }
